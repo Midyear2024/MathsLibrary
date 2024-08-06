@@ -3,37 +3,37 @@
 
 #include <iostream>
 #include "Vector3.h"
+#include "Constants.h"
+
+
+using namespace Constants;
+
+#define PRECISION(x) abs(x) < FLOAT_PRECISION ? 0 : x
 
 int main()
 {
-    Vector3 vector { 2, 4, 6 };
-    Vector3 vector1 { 4, 6, 8};
-
-
- /*   std::cout << vector.Magnitude() << " " << vector.MagnitudeSqr() << std::endl;
-    std::cout << vector1.Magnitude() << " " << vector1.MagnitudeSqr() << std::endl;
-    std::cout << vector.Distance(vector1) << std::endl;
-    std::cout << vector1.Distance(vector) << std::endl;*/
+    Vector3 vector { -1, 1, 1 };
+    Vector3 vector1 { -4000, -10, -10000000};
 
     vector.Normalise();
-    std::cout << vector.ToString() << " ";
-    vector.Normalise();
-    std::cout << vector.ToString() << std::endl;
-   
-    std::cout << vector1.ToString() << " ";
-    Vector3 vector3 = vector1.Normalised();
-    std::cout << vector3.ToString() << " "  << vector1.ToString() << std::endl;
+    vector1.Normalise();
 
+    Vector3 vecPerp = vector.CrossProduct(vector1);
+    vecPerp.Normalise();
+
+    float dot = vector.DotProduct(vecPerp);
+    dot = PRECISION(dot);
+    
+
+
+    if (dot > 0.5f)
+    {
+        std::cout << dot << ": " << "Back Stabbed";
+    }
+    else
+    {
+        std::cout << dot << ": " << "Front Stabbed";
+    }
 
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file

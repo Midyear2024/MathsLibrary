@@ -140,6 +140,26 @@ Vector3 Vector3::Normalised() const
 	return copy;
 }
 
+float Vector3::DotProduct(const Vector3& other)
+{
+	float a, b, c;
+	a = x * other.x;
+	b = y * other.y;
+	c = z * other.z;
+
+	return a + b + c;
+}
+
+Vector3 Vector3::CrossProduct(const Vector3& other) const
+{
+	float a, b, c;
+	a = (y * other.z) - (z * other.y);
+	b = (z * other.x) - (x * other.z);
+	c = (x * other.y) - (y * other.x);
+
+	return Vector3(a,b,c);
+}
+
 float Vector3::Distance(const Vector3& other) const
 {
 	return (*this - other).Magnitude();
@@ -155,4 +175,17 @@ std::string Vector3::ToString() const
 Vector3 operator*(float lhs, Vector3 rhs)
 {
 	return rhs * lhs;
+}
+
+float DotProduct(const Vector3& vec1, const Vector3& vec2)
+{
+	float a, b, c;
+	a = vec1[0] * vec2[0];
+	b = vec1[1] * vec2[1];
+	c = vec1[2] * vec2[2];
+
+	float total = a + b;
+	total = total + c;
+
+	return a + b + c;
 }
