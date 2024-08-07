@@ -140,7 +140,7 @@ Vector3 Vector3::Normalised() const
 	return copy;
 }
 
-float Vector3::DotProduct(const Vector3& other)
+float Vector3::Dot(const Vector3& other)
 {
 	float a, b, c;
 	a = x * other.x;
@@ -150,7 +150,7 @@ float Vector3::DotProduct(const Vector3& other)
 	return a + b + c;
 }
 
-Vector3 Vector3::CrossProduct(const Vector3& other) const
+Vector3 Vector3::Cross(const Vector3& other) const
 {
 	float a, b, c;
 	a = (y * other.z) - (z * other.y);

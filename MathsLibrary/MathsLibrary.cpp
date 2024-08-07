@@ -4,7 +4,7 @@
 #include <iostream>
 #include "Vector3.h"
 #include "Constants.h"
-
+#include "Matrix3.h"
 
 using namespace Constants;
 
@@ -12,28 +12,34 @@ using namespace Constants;
 
 int main()
 {
-    Vector3 vector { -1, 1, 1 };
-    Vector3 vector1 { -4000, -10, -10000000};
-
-    vector.Normalise();
-    vector1.Normalise();
-
-    Vector3 vecPerp = vector.CrossProduct(vector1);
-    vecPerp.Normalise();
-
-    float dot = vector.DotProduct(vecPerp);
-    dot = PRECISION(dot);
     
+    Matrix3 mat = MakeIdentity();
+    mat[6] = 7;
+    mat[7] = 8;
+    std::cout << mat.ToString();
+
+    //Vector3 vector { -1, 1, 1 };
+    //Vector3 vector1 { -4000, -10, -10000000};
+
+    //vector.Normalise();
+    //vector1.Normalise();
+
+    //Vector3 vecPerp = vector.Cross(vector1);
+    //vecPerp.Normalise();
+
+    //float dot = vector.Dot(vecPerp);
+    //dot = PRECISION(dot);
+    //
 
 
-    if (dot > 0.5f)
-    {
-        std::cout << dot << ": " << "Back Stabbed";
-    }
-    else
-    {
-        std::cout << dot << ": " << "Front Stabbed";
-    }
+    //if (dot > 0.5f)
+    //{
+    //    std::cout << dot << ": " << "Back Stabbed";
+    //}
+    //else
+    //{
+    //    std::cout << dot << ": " << "Front Stabbed";
+    //}
 
 }
 

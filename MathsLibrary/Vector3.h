@@ -41,8 +41,8 @@ public:
 	void Normalise();
 	Vector3 Normalised() const;
 
-	float DotProduct(const Vector3& other);
-	Vector3 CrossProduct(const Vector3& other) const;
+	float Dot(const Vector3& other);
+	Vector3 Cross(const Vector3& other) const;
 
 	float Distance(const Vector3& other) const;
 
