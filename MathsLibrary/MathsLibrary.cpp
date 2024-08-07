@@ -12,11 +12,20 @@ using namespace Constants;
 
 int main()
 {
-    
+
+  
     Matrix3 mat = MakeIdentity();
     mat[6] = 7;
     mat[7] = 8;
-    std::cout << mat.ToString();
+
+    Matrix3 mat1 = MakeIdentity();
+    mat1[0] = 5;
+    mat1[4] = 5;
+
+    Matrix3 mat2 = mat * mat1;
+
+
+    std::cout << mat2.ToString();   
 
     //Vector3 vector { -1, 1, 1 };
     //Vector3 vector1 { -4000, -10, -10000000};
