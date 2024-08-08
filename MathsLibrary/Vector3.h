@@ -3,16 +3,17 @@
 #include <string>
 
 struct Vector3 {
-
-private:
 	union {
-		struct{ float x, y, z; }; //12 bytes (3 floats, 4bytes each)
+		struct {
+			float x, y;
+			union { 
+				float z, w; 
+			};
+		}; //12 bytes (3 floats, 4bytes each)
 		struct{ float r, g, b; }; //12 bytes (3 floats, 4bytes each)
 		float data[3];            //12 bytes (3 floats, 4bytes each)
 	};
 	
-
-public:
 	Vector3();
 	Vector3(const float x, const float y, const float z);
 	Vector3(const float value);

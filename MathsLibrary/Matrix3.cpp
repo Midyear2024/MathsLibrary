@@ -36,6 +36,26 @@ Vector3 Matrix3::GetRow(int i) const
     return vec;
 }
 
+void Matrix3::RotateX(float radians)
+{
+}
+
+void Matrix3::RotateY(float radians)
+{
+}
+
+void Matrix3::RotateZ(float radians)
+{
+    auto mat = MakeRotateZ(radians);
+    Set(*this * mat);
+}
+
+void Matrix3::Set(const Matrix3& mat)
+{
+    for (int i = 0; i < 9; i++)
+        m[i] = mat[i];
+}
+
 float& Matrix3::operator[](int dim)
 {
 	return m[dim];

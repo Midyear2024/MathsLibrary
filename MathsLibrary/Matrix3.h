@@ -1,9 +1,8 @@
 #pragma once
 #include "Vector3.h"
 // Column Major 3x3 Matrix
-class Matrix3
+struct Matrix3
 {
-public:
 	union
 	{
 		struct
@@ -19,6 +18,10 @@ public:
     Matrix3(float v1, float v2, float v3, float v4, float v5, float v6, float v7, float v8, float v9);
     Matrix3 Transposed() const;
     Vector3 GetRow(int i) const;
+    void RotateX(float radians);
+    void RotateY(float radians);
+    void RotateZ(float radians);
+    void Set(const Matrix3& mat);
 
     // mutable access to each element
     float& operator[](int dim);
@@ -29,8 +32,6 @@ public:
     Vector3 operator *(Vector3 rhs) const;
 
     std::string ToString() const;
-
-private:
 
 };
 
@@ -55,3 +56,45 @@ static Matrix3 MakeIdentity()
     return identity;
 }
 
+
+//Param: r is radians
+static Matrix3 MakeRotateX(float r)
+{
+    return Matrix3(1, 0, 0, //xAxis
+                   0, cosf(r), -sinf(r), //yAxis
+                   0, sinf(r), cosf(r)); //zAxis
+}
+//Param: r is radians
+static Matrix3 MakeRotateY(float r)
+{
+    return Matrix3(cosf(r), 0, sinf(r), //xAxis
+                   0, 1, 0, //yAxis
+                   -sinf(r), 0 ,cosf(r)); //zAxis
+}
+//Param: r is radians
+static Matrix3 MakeRotateZ(float r)
+{
+    return Matrix3(cosf(r), -sinf(r), 0, //xAxis
+                   sinf(r), cosf(r), 0, //yAxis
+                   0, 0, 1); //zAxis
+}
+
+static Matrix3 MakeEuler(float pitch, float yaw, float roll)
+{
+    Matrix3 x = MakeRotateX(pitch);
+    Matrix3 y = MakeRotateY(yaw);
+    Matrix3 z = MakeRotateZ(roll);
+
+    return (z * y * x);
+}
+
+static Matrix3 MakeScale(float xScale, float yScale, float zScale)
+{
+    return Matrix3(xScale, 0, 0,
+                   0, yScale, 0,
+                   0, 0, zScale);
+}
+static Matrix3 MakeScale(Vector3 scale)
+{
+    return MakeScale(scale.x, scale.y, scale.z);
+}
